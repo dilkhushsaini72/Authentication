@@ -15,7 +15,7 @@ mongoose
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api", authRouter);
-app.use("/admin", adminRouter);
+app.use("/api/admin", adminRouter);
 
 app.listen(PORT, () => {
   console.log(`Server started on http://hocalhost:${PORT}`);

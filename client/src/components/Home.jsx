@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Cookie from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -32,10 +33,12 @@ const Home = () => {
         headers: { "Content-Type": "application/json" },
       });
 
+      const data = await response.json();
       if (response.ok) {
         Cookie.remove("token");
-        window.location.href = "/";
+        navigate("/");
       }
+      toast.success(data.message);
     } catch (error) {
       console.error("Error during logout:", error);
     }
@@ -61,6 +64,11 @@ const Home = () => {
           Loggin
         </button>
       )}
+      <Link to="/admin">
+        <button className="bg-blue-500 absolute left-10 top-5 hover:bg-blue-700 text-white px-4 py-2 rounded">
+          Admin
+        </button>
+      </Link>
       <div className="flex justify-center items-center h-[calc(100vh-4rem)]">
         <h2 className="text-6xl font-extrabold">Home</h2>
       </div>
